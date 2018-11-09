@@ -1,0 +1,76 @@
+{
+	"$schema": "http://schemas.dev.brightspace.com/feature-flags/class-stream/tenant-multivariate/v1_0.json",
+	"name": "Fruit",
+	"description": "A flag for the extra type of fruit grown on the field",
+	"rallyId": "DE77777",
+	"tags": [
+		"mocha",
+		"test",
+		"ABC"
+	],
+	"variations": [
+		{
+			"key": "none",
+			"name": "No Fruit",
+			"description": "No fruit is grown",
+			"value": 0.0
+		},
+		{
+			"key": "bananas",
+			"name": "Bananas",
+			"description": "Bananas are grown",
+			"value": 1.5
+		},
+		{
+			"key": "grapes",
+			"name": "Grapes",
+			"description": "Grapes are grown",
+			"value": 2.22
+		}
+	],
+	"environments": {
+		"production": {
+			"defaultVariation": "none",
+			"targets": [
+				{
+					"tenants": [
+						"3d005b79-d38c-4893-a507-77e7f78fe2fa",
+						"50b95e47-4f69-4219-8d1d-3c13af3479de"
+					],
+					"variation": "bananas"
+				},
+				{
+					"tenants": [
+						{
+							"tenantId": "0b801fe6-82b8-44ee-acbe-1b563fa5c6ff",
+							"comments": "Something deep and meaningful"
+						}
+					],
+					"variation": "grapes"
+				}
+			],
+			"rules": [
+				{
+					"versions": {
+						"start": "10.8.4.0"
+					},
+					"tenantDomains": [
+						"www.tenant_b.org"
+					],
+					"variation": "bananas"
+				}
+			]
+		},
+		"development": {
+			"defaultVariation": "grapes",
+			"rules": [
+				{
+					"versions": {
+						"start": "10.8.4.0"
+					},
+					"variation": "none"
+				}
+			]
+		}
+	}
+}

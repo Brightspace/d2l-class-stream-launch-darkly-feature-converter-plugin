@@ -1,0 +1,48 @@
+{
+	"$schema": "http://schemas.dev.brightspace.com/feature-flags/class-stream/tenant-boolean/v1_0.json",
+	"name": "Switch",
+	"description": "Simple on/off switch",
+	"rallyId": "DE77777",
+	"tags": [
+		"mocha",
+		"test",
+		"ABC"
+	],
+	"variations": {
+		"true": {
+			"name": "On",
+			"description": "Turns the switch on"
+		},
+		"false": {
+			"name": "Off",
+			"description": "Turns the switch off"
+		}
+	},
+	"environments": {
+		"production": {
+			"defaultVariation": "false",
+			"targets": [
+				{
+					"tenants": [
+						"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+					],
+					"variation": "true"
+				}
+			]
+		},
+		"development": {
+			"defaultVariation": "true",
+			"rules": [
+				{
+					"versions": {
+						"start": "10.8.4.0"
+					},
+					"tenantDomains": [
+						"www.tenant_b.org"
+					],
+					"variation": "false"
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,89 @@
+version: 2
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+
+      - test:
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
+
+      - diff_aws:
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              ignore: /^v\d+\.\d+\.\d+$/
+
+      - deploy_aws:
+          requires: [ 'test' ]
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
+
+      - deploy_npm:
+          requires: [
+            'test',
+            'deploy_aws'
+          ]
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
+
+jobs:
+
+  test:
+    docker:
+      - image: circleci/node:8.11.3
+    steps:
+      - checkout
+
+      - run:
+         name: npm install
+         command: npm install
+
+      - run:
+         name: npm run ci
+         command: npm run ci
+
+  diff_aws:
+    docker:
+      - image: jeffashton/circleci-awscli:1.15.63
+    steps:
+      - checkout
+
+      - run:
+         name: aws s3 sync --dryrun
+         command: aws s3 sync --dryrun --size-only ./schemas/ s3://schemas.dev.brightspace.com/feature-flags/class-stream/
+
+  deploy_aws:
+    docker:
+      - image: jeffashton/circleci-awscli:1.15.63
+    steps:
+      - checkout
+
+      - run:
+         name: aws s3 sync
+         command: aws s3 sync --size-only ./schemas/ s3://schemas.dev.brightspace.com/feature-flags/class-stream/
+
+  deploy_npm:
+    docker:
+      - image: circleci/node:8.11.3
+    steps:
+      - checkout
+
+      - run:
+         name: npm login
+         command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+
+      - run:
+         name: npm publish
+         command: npm publish

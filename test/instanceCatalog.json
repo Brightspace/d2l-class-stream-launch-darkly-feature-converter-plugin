@@ -1,0 +1,14 @@
+[
+	{
+		"instanceId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+		"name": "instance_a",
+		"tenants": [
+			{
+				"tenantId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+				"domains": [
+					"www.tenant_b.org"
+				]
+			}
+		]
+	}
+]

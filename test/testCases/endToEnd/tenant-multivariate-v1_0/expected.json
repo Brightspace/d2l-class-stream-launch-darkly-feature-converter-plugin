@@ -1,0 +1,101 @@
+{
+	"name": "Fruit",
+	"kind": "multivariate",
+	"description": "A flag for the extra type of fruit grown on the field",
+	"includeInSnippet": false,
+	"variations": [
+		{
+			"name": "No Fruit",
+			"description": "No fruit is grown",
+			"value": 0.0
+		},
+		{
+			"name": "Bananas",
+			"description": "Bananas are grown",
+			"value": 1.5
+		},
+		{
+			"name": "Grapes",
+			"description": "Grapes are grown",
+			"value": 2.22
+		}
+	],
+	"temporary": true,
+	"tags": [
+		"ABC",
+		"class-stream-generated-flag",
+		"class-stream-tenant-flag",
+		"mocha",
+		"test"
+	],
+	"environments": {
+		"production": {
+			"on": true,
+			"targets": [
+				{
+					"values": [
+						"3d005b79-d38c-4893-a507-77e7f78fe2fa",
+						"50b95e47-4f69-4219-8d1d-3c13af3479de"
+					],
+					"variation": 1
+				},
+				{
+					"values": [
+						"0b801fe6-82b8-44ee-acbe-1b563fa5c6ff"
+					],
+					"variation": 2
+				}
+			],
+			"rules": [
+				{
+					"variation": 1,
+					"clauses": [
+						{
+							"attribute": "productVersion",
+							"op": "greaterThanOrEqual",
+							"values": [
+								10080400000
+							],
+							"negate": false
+						},
+						{
+							"attribute": "key",
+							"op": "in",
+							"values": [
+								"bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+							],
+							"negate": false
+						}
+					]
+				}
+			],
+			"fallthrough": {
+				"variation": 0
+			},
+			"offVariation": 0
+		},
+		"test": {
+			"on": true,
+			"targets": [],
+			"rules": [
+				{
+					"variation": 0,
+					"clauses": [
+						{
+							"attribute": "productVersion",
+							"op": "greaterThanOrEqual",
+							"values": [
+								10080400000
+							],
+							"negate": false
+						}
+					]
+				}
+			],
+			"fallthrough": {
+				"variation": 2
+			},
+			"offVariation": 2
+		}
+	}
+}

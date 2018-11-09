@@ -1,0 +1,75 @@
+{
+	"name": "Switch",
+	"kind": "boolean",
+	"description": "Simple on/off switch",
+	"includeInSnippet": false,
+	"variations": [
+		{
+			"name": "On",
+			"description": "Turns the switch on",
+			"value": true
+		},
+		{
+			"name": "Off",
+			"description": "Turns the switch off",
+			"value": false
+		}
+	],
+	"temporary": true,
+	"tags": [
+		"ABC",
+		"class-stream-generated-flag",
+		"class-stream-tenant-flag",
+		"mocha",
+		"test"
+	],
+	"environments": {
+		"production": {
+			"on": true,
+			"targets": [
+				{
+					"values": [
+						"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+					],
+					"variation": 0
+				}
+			],
+			"rules": [],
+			"fallthrough": {
+				"variation": 1
+			},
+			"offVariation": 1
+		},
+		"test": {
+			"on": true,
+			"targets": [],
+			"rules": [
+				{
+					"variation": 1,
+					"clauses": [
+						{
+							"attribute": "productVersion",
+							"op": "greaterThanOrEqual",
+							"values": [
+								10080400000
+							],
+							"negate": false
+						},
+						{
+							"attribute": "key",
+							"op": "in",
+							"values": [
+								"bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+							],
+							"negate": false
+						}
+					]
+				}
+			],
+			"fallthrough": {
+				"variation": 0
+			},
+			"offVariation": 0
+		}
+	}
+}
