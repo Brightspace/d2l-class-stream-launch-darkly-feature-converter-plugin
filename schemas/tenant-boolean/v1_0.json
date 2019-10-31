@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-06/schema#",
-	"$id": "http://schemas.dev.brightspace.com/feature-flags/class-stream/tenant-boolean/v1_0.json",
+	"$id": "http://schemas.featureflags.d2ldev.com/class-stream/tenant-boolean/v1_0.json",
 	"type": "object",
 	"additionalProperties": false,
 	"required": [
@@ -13,7 +13,7 @@
 			"type": "string",
 			"title": "The schema which uniquely identifies the feature flag type",
 			"enum": [
-				"http://schemas.dev.brightspace.com/feature-flags/class-stream/tenant-boolean/v1_0.json"
+				"http://schemas.featureflags.d2ldev.com/class-stream/tenant-boolean/v1_0.json"
 			]
 		},
 		"name": {

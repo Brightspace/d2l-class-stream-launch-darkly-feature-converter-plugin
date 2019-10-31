@@ -1,4 +1,7 @@
-version: 2
+version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@0.1.16
 
 workflows:
   version: 2
@@ -38,6 +41,20 @@ workflows:
             tags:
               only: /^v\d+\.\d+\.\d+$/
 
+commands:
+
+  aws-configure-role-profile:
+    parameters:
+      role_arn:
+        type: string
+    steps:
+      - aws-cli/setup: { profile-name: build_user }
+      - run:
+          name: "Configure AWS Default Profile"
+          command: >
+            aws configure set role_arn "<<parameters.role_arn>>" --profile default;
+            aws configure set source_profile build_user --profile default
+
 jobs:
 
   test:
@@ -55,24 +72,34 @@ jobs:
          command: npm run ci
 
   diff_aws:
-    docker:
-      - image: jeffashton/circleci-awscli:1.15.63
+    executor: aws-cli/default
+    environment:
+       AWS_DEFAULT_REGION: us-east-1
     steps:
       - checkout
+      - aws-cli/install
+
+      - aws-configure-role-profile:
+         role_arn: "arn:aws:iam::378118068829:role/schemas-publisher"
 
       - run:
          name: aws s3 sync --dryrun
-         command: aws s3 sync --dryrun --size-only ./schemas/ s3://schemas.dev.brightspace.com/feature-flags/class-stream/
+         command: aws s3 sync --dryrun --profile default --size-only ./schemas/ s3://schemas.featureflags.d2ldev.com/class-stream/
 
   deploy_aws:
-    docker:
-      - image: jeffashton/circleci-awscli:1.15.63
+    executor: aws-cli/default
+    environment:
+       AWS_DEFAULT_REGION: us-east-1
     steps:
       - checkout
+      - aws-cli/install
+
+      - aws-configure-role-profile:
+         role_arn: "arn:aws:iam::378118068829:role/schemas-publisher"
 
       - run:
          name: aws s3 sync
-         command: aws s3 sync --size-only ./schemas/ s3://schemas.dev.brightspace.com/feature-flags/class-stream/
+         command: aws s3 sync --profile default --size-only ./schemas/ s3://schemas.featureflags.d2ldev.com/class-stream/
 
   deploy_npm:
     docker:
