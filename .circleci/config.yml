@@ -67,7 +67,7 @@ jobs:
 
       - run:
          name: aws s3 sync --dryrun
-         command: aws s3 sync --dryrun --size-only ./schemas/ s3://schemas.featureflags.d2ldev.com/class-stream/
+         command: aws s3 sync --dryrun --acl public-read --size-only ./schemas/ s3://schemas.featureflags.d2ldev.com/class-stream/
 
   deploy_aws:
     executor: aws-cli/default
@@ -79,7 +79,7 @@ jobs:
 
       - run:
          name: aws s3 sync
-         command: aws s3 sync --size-only ./schemas/ s3://schemas.featureflags.d2ldev.com/class-stream/
+         command: aws s3 sync --acl public-read --size-only ./schemas/ s3://schemas.featureflags.d2ldev.com/class-stream/
 
   deploy_npm:
     docker:
