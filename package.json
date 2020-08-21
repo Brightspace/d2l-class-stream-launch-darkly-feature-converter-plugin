@@ -24,15 +24,15 @@
   },
   "homepage": "https://github.com/Brightspace/d2l-class-stream-launch-darkly-feature-converter-plugin#readme",
   "dependencies": {
-    "ajv": "^6.9.1",
-    "lodash": "^4.17.15"
+    "ajv": "^6.12.4",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^5.16.0",
-    "file-url": "^2.0.2",
-    "mocha": "^5.2.0",
-    "nyc": "^14.1.1"
+    "eslint": "^7.7.0",
+    "file-url": "^3.0.0",
+    "mocha": "^8.1.1",
+    "nyc": "^15.1.0"
   },
   "nyc": {
     "exclude": [
