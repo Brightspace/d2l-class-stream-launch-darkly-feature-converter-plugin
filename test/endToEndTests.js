@@ -14,13 +14,13 @@ describe( 'EndToEndTests', function() {
 
 		const path = pathUtil.join( __dirname, 'instanceCatalog.json' );
 		const fileUrl = formatFileUrl( path );
-		process.env.D2L_CLASS_STREAM_INSTANCE_CATALOG_SOURCE = fileUrl;
+		process.env.D2L_LMS_INSTANCE_CATALOG_SOURCE = fileUrl;
 
 		const options = {};
 		convertersPlugin( options, ( err, converters ) => {
 
 			if( err ) {
-				delete process.env.D2L_CLASS_STREAM_INSTANCE_CATALOG_SOURCE;
+				delete process.env.D2L_LMS_INSTANCE_CATALOG_SOURCE;
 				return done( err );
 			}
 
@@ -30,7 +30,7 @@ describe( 'EndToEndTests', function() {
 				} );
 			} );
 
-			delete process.env.D2L_CLASS_STREAM_INSTANCE_CATALOG_SOURCE;
+			delete process.env.D2L_LMS_INSTANCE_CATALOG_SOURCE;
 			return done();
 		} );
 	} );
