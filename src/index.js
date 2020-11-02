@@ -1,9 +1,11 @@
 const _ = require( 'lodash' );
+const util = require( 'util' );
 const Converter = require( './Converter.js' );
 const EnvironmentMapper = require( './EnvironmentMapper.js' );
 const JsonSchemaValidator = require( './JsonSchemaValidator.js' );
 
-const loadInstanceCatalog = require( './instanceCatalog/instanceCatalogLoader.js' );
+const lmsInstanceCatalog = require( 'd2l-lms-instance-catalog' );
+const loadInstanceCatalog = util.callbackify( lmsInstanceCatalog.loadFromEnvironment );
 
 const TenantRulesMapper = require( './tenant/TenantRulesMapper.js' );
 const TenantTargetsMapper = require( './tenant/TenantTargetsMapper.js' );

@@ -1,9 +1,10 @@
 const assert = require( 'chai' ).assert;
-const InstanceCatalog = require( '../src/instanceCatalog/InstanceCatalog.js' );
+const InstanceCatalog = require( 'd2l-lms-instance-catalog' ).InstanceCatalog;
 const TenantRulesMapper = require( '../src/tenant/TenantRulesMapper.js' );
 const VariationIndexMap = require( '../src/variations/VariationIndexMap.js' );
 
 const instanceCatalog = new InstanceCatalog(
+	new Map(),
 	new Map( [
 		[ 'www.tenant_a.org', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa' ],
 		[ 'www.tenant_c.org', 'cccccccc-cccc-cccc-cccc-cccccccccccc' ]
