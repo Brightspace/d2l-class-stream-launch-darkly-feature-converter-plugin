@@ -25,6 +25,7 @@
   "homepage": "https://github.com/Brightspace/d2l-class-stream-launch-darkly-feature-converter-plugin#readme",
   "dependencies": {
     "ajv": "^6.12.4",
+    "d2l-lms-instance-catalog": "0.0.2",
     "lodash": "^4.17.20"
   },
   "devDependencies": {
