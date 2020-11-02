@@ -12,7 +12,10 @@ const variationIndexMap = new VariationIndexMap( {
 
 const mapper = new EnvironmentMapper(
 	new TenantTargetsMapper(
-		new InstanceCatalog( new Map() )
+		new InstanceCatalog(
+			new Map(),
+			new Map()
+		)
 	),
 	new TenantRulesMapper()
 );

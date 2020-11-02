@@ -4,6 +4,7 @@ const TenantTargetsMapper = require( '../src/tenant/TenantTargetsMapper.js' );
 const VariationIndexMap = require( '../src/variations/VariationIndexMap.js' );
 
 const instanceCatalog = new InstanceCatalog(
+	new Map(),
 	new Map( [
 		[ 'www.tenant_a.org', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa' ],
 		[ 'www.tenant_c.org', 'cccccccc-cccc-cccc-cccc-cccccccccccc' ]
